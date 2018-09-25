@@ -38,25 +38,11 @@ frmMain::frmMain(QWidget *parent) :
     this->InitStyle();
     server = new QTcpServer();
     connect(server,&QTcpServer::newConnection,this,&frmMain::server_New_Connect);
-    /* 进度条调零 */
-    //ui->recvProg->setValue(0);
-    /* 启用监听按钮 */
-    //ui->listenBtn->setEnabled(true);
     fileBytes = gotBytes = nameSize = 0;
     file = Q_NULLPTR;
     receive = Q_NULLPTR;
     /* 连接请求 -> 接受连接 */
     connect(server, SIGNAL(newConnection()),this, SLOT(accept_connect()));
-
-    /*socket = new QTcpSocket();
-
-    //连接信号槽
-    QObject::connect(socket, &QTcpSocket::readyRead, this, &frmMain::socket_Read_Data);
-    QObject::connect(socket, &QTcpSocket::disconnected, this, &frmMain::socket_Disconnected);
-
-    ui->pushButton_Send->setEnabled(false);
-    ui->lineEdit_IP->setText("127.0.0.1");
-    ui->lineEdit_Port->setText("8765");*/
 }
 
 frmMain::~frmMain()
@@ -332,7 +318,6 @@ void frmMain::on_pushButton_13_clicked()
     }
     //Column 解密函数
     if(ui->tabWidget->currentIndex()==0 && ui->toolBox->currentIndex()==3 && ui->radioButton_10->isChecked()){
-      //  this -> ui ->lineEdit -> setEnabled(false);
         char temp[500] = {0};
         QString qkey = this -> ui -> lineEdit -> text();
         string key = qkey.toStdString();
@@ -389,20 +374,6 @@ void frmMain::on_pushButton_2_clicked()
 //DES加密
 void frmMain::on_pushButton_3_clicked()
 {
-    /*
-    char streamCipher[500] = {0};   //储存二进制密文
-    char Cipher[500] = { 0 };   //储存字符密文
-    char streamPlain[500] = { 0 };  //储存二进制明文
-
-    QString qkey = this -> ui -> lineEdit_2 -> text();
-    string key = qkey.toStdString();
-    QString qstr = this -> ui -> plainTextEdit_3->toPlainText();
-    string st = qstr.toStdString();
-    string str = RC4(key, st, streamCipher, Cipher, streamPlain);
-    QString sresult = QString::fromStdString(str);
-    this -> ui -> plainTextEdit_4 -> setPlainText(sresult);
-    */
-
     char streamCipher[500] = {0};   //储存二进制密文
     char Cipher[500] = { 0 };   //储存字符密文
     char streamPlain[500] = { 0 };  //储存二进制明文
@@ -433,67 +404,13 @@ void frmMain::on_pushButton_3_clicked()
     this -> ui -> plainTextEdit_5 -> setPlainText(s3);
 }
 
-void frmMain::on_pushButton_4_clicked()
-{
-
-    char cp[1000] = {0};
-    char cq[1000] = {0};
-    char cg[1000] = {0};
-    char cpub_key[1000] = {0};
-    char cpriv_key[1000] = {0};
-    char result[1000] = {0};
-
-
-    //char *cp, *cq, *cg, *cpub_key, *cpriv_key;
-   // char result[1024] = {0};
-   // char result[500] ={0};
-    string smsgs, s1, s2, s3, s4, s5, s6;
-    QString qmsgs, str1, str2, str3, str4, str5, str6;
-
-    //qmsgs = this -> ui -> lineEdit_4 -> text();
-    smsgs = qmsgs.toStdString();
-    //myDSA(smsgs, cp, cq, cg, cpub_key, cpriv_key, result);
-
-
-    //char buffer[500] = {0};
-
-
-
-    s1 = cp;
-    str1 = QString::fromStdString(s1);
-    //this -> ui -> plainTextEdit_8 -> setPlainText(str1);
-
-    s2 = cq;
-    str2 = QString::fromStdString(s2);
-    //this -> ui -> plainTextEdit_9 -> setPlainText(str2);
-
-    s3 = cg;
-    str3 = QString::fromStdString(s3);
-    //this -> ui -> plainTextEdit_10 -> setPlainText(str3);
-
-    s4 = cpub_key;
-    str4 = QString::fromStdString(s4);
-    //this -> ui -> plainTextEdit_11 -> setPlainText(str4);
-
-    s5 = cpriv_key;
-    str5 = QString::fromStdString(s5);
-    //this -> ui -> plainTextEdit_12 -> setPlainText(str5);
-
-    s6 = result;
-    str6 = QString::fromStdString(s6);
-    //this -> ui -> plainTextEdit_13 -> setPlainText(str6);
-}
 
 void frmMain::on_pushButton_5_clicked()
 {
-    //BIGNUM d,n,e, p, q;
-
     unsigned long int flag;
     string s1, s2, s3, s4, s5;
     QString str1, str2, str3, str4, str5;
     char ch[500] = "";
-    //static BIGNUM d,n,e, p, q;
-
 
     key(p,q,e,n,d);
     out_put(p, ch);
@@ -514,7 +431,6 @@ void frmMain::on_pushButton_5_clicked()
 
     flag = e.value[0];
     itoa(flag, ch, 10);
-    //out_put(q, ch);
     s4 = ch;
     str4 = QString::fromStdString(s4);
     this -> ui ->plainTextEdit_17->setPlainText(str4);

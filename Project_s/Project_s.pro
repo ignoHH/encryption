@@ -28,8 +28,6 @@ HEADERS  += \
     des.h \
     bignum.h \
     miller_rabin.h \
-    rsa.h \
-    md5.h \
     dh_fun.h \
     table.h \
     fun_dh_simple.h \
